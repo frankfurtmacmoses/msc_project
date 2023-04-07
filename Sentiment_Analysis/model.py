@@ -1,4 +1,4 @@
-import config
+import Sentiment_Analysis.config as config
 import transformers
 import torch.nn as nn
 

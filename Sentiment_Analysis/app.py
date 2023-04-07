@@ -1,10 +1,10 @@
-import config
+import Sentiment_Analysis.config as config
 import torch
 import flask
 import time
 from flask import Flask
 from flask import request
-from model import BERTBaseUncased
+from Sentiment_Analysis.model import BERTBaseUncased
 import functools
 import torch.nn as nn
 

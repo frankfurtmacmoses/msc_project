@@ -1,12 +1,12 @@
-import config
-import dataset
-import engine
+import Sentiment_Analysis.config as config
+import Sentiment_Analysis.dataset as dataset
+import Sentiment_Analysis.engine as engine
 import torch
 import pandas as pd
 import torch.nn as nn
 import numpy as np
 
-from model import BERTBaseUncased
+from Sentiment_Analysis.model import BERTBaseUncased
 from sklearn import model_selection
 from sklearn import metrics
 from transformers import AdamW
