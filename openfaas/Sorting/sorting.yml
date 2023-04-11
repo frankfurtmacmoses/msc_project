@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://k8m:30010
+functions:
+  sorting:
+    lang: python3
+    handler: ./sorting
+    image: sorting:latest
+
