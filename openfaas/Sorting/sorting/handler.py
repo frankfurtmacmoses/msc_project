@@ -1,36 +1,17 @@
-import random 
+from .sorting_util import roundom_generator
+from .sorting_util import insertionSort
 import sys
 import time
-def roundom_generator(size ):
-    arr = [random.randrange(1, size) for i in range(1,size)]
-    return arr
-
- 
-# Function to do insertion sort
-def insertionSort(arr):
- 
-    # Traverse through 1 to len(arr)
-    for i in range(1, len(arr)):
- 
-        key = arr[i]
- 
-        # Move elements of arr[0..i-1], that are
-        # greater than key, to one position ahead
-        # of their current position
-        j = i-1
-        while j >= 0 and key < arr[j] :
-                arr[j + 1] = arr[j]
-                j -= 1
-        arr[j + 1] = key
-    return arr
-    
- 
+import json
 
 def handle(req):
-    
+    start_time = time.time()
     """handle a request to the function
     Args:
         req (str): request body
     """
- 
-    return req
+    req = {}
+    unsortedarray = roundom_generator(10000)
+    sortedarray = insertionSort(unsortedarray)
+    req = {"sortedarray": sortedarray , "Completed in seconds ": (time.time() - start_time)}
+    print(req)

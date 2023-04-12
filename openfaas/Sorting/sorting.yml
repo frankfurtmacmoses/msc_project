@@ -6,5 +6,5 @@ functions:
   sorting:
     lang: python3
     handler: ./sorting
-    image: sorting:latest
+    image: frankfurtmacmoses/fsorting:latest
 

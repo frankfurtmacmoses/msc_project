@@ -25,12 +25,10 @@ def insertionSort(arr):
         arr[j + 1] = key
     return arr
     
- 
- 
 # Driver code to test above
 
 if __name__ == '__main__':
-    start_time = time.time()
+   start_time = time.time()
 
     if len(sys.argv) > 2:
         print("Too many parameters: You must specify array size to sort in digit e.g: 10.")
@@ -40,11 +38,9 @@ if __name__ == '__main__':
         arr = 100
     else:
         arr = int(sys.argv[1])
+    
     size = roundom_generator(arr)
-    print(size)
-
-    size = insertionSort(size)
+    sorted = insertionSort(size)
     #for i in range(size):
     #    print ("% d" % size[i])
-    print(size)
-    print("--- %s seconds ---" % (time.time() - start_time))
+    print("Completed in seconds: " + (time.time() - start_time))
