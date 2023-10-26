@@ -1,0 +1,21 @@
+Name:                     grafana-svc
+Namespace:                grafana
+Labels:                   app=grafana
+Annotations:              <none>
+Selector:                 app=grafana
+Type:                     LoadBalancer
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       172.20.114.162
+IPs:                      172.20.114.162
+Port:                     <unset>  3000/TCP
+TargetPort:               3000/TCP
+NodePort:                 <unset>  31513/TCP
+Endpoints:                10.93.42.10:3000
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:
+  Type     Reason                  Age               From                Message
+  ----     ------                  ----              ----                -------
+  Normal   EnsuringLoadBalancer    6s (x8 over 10m)  service-controller  Ensuring load balancer
+  Warning  SyncLoadBalancerFailed  6s (x8 over 10m)  service-controller  Error syncing load balancer: failed to ensure load balancer: could not find any suitable subnets for creating the ELB

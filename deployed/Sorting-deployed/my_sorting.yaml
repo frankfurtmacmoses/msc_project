@@ -1,0 +1,17 @@
+---
+apiVersion: openfaas.com/v1
+kind: Function
+metadata:
+    name: sorting
+    namespace: openfaas-fn
+spec:
+    replicas: 3
+    name: sorting
+    image: frankfurtmacmoses/sorting:latest
+    limits:
+        memory: 40Mi
+        cpu: 100m
+    requests:
+        memory: 20Mi
+        cpu: 100m
+

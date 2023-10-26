@@ -1,0 +1,24 @@
+Name:                     prom-server-svc
+Namespace:                prometheus
+Labels:                   app.kubernetes.io/component=server
+                          app.kubernetes.io/instance=trelease
+                          app.kubernetes.io/managed-by=Helm
+                          app.kubernetes.io/name=prometheus
+                          app.kubernetes.io/part-of=prometheus
+                          app.kubernetes.io/version=v2.43.0
+                          helm.sh/chart=prometheus-21.0.0
+Annotations:              service.beta.kubernetes.io/aws-load-balancer-internal: true
+Selector:                 app.kubernetes.io/component=server,app.kubernetes.io/instance=trelease,app.kubernetes.io/name=prometheus,app.kubernetes.io/version=v2.43.0
+Type:                     LoadBalancer
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       172.20.195.66
+IPs:                      172.20.195.66
+LoadBalancer Ingress:     internal-abaa8d55a915b45a7a719e2d170f8899-374585614.us-east-1.elb.amazonaws.com
+Port:                     <unset>  9090/TCP
+TargetPort:               9090/TCP
+NodePort:                 <unset>  32265/TCP
+Endpoints:                10.93.42.45:9090
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>

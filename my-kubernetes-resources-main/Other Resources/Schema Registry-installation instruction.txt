@@ -1,0 +1,6 @@
+helm repo add lsstsqre https://lsst-sqre.github.io/charts/
+helm repo update
+
+helm install ssr lsstsqre/strimzi-registry-operator --set clusterNamespace="kafka",clusterName="my-cluster"
+
+

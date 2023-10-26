@@ -1,0 +1,202 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: a8db5fc88ed20ffa8e89dfdcb5419c3798960f2daebd18600717a45a31a62ca0
+    cni.projectcalico.org/podIP: 172.16.13.177/32
+    cni.projectcalico.org/podIPs: 172.16.13.177/32
+    prometheus.io/port: "9113"
+    prometheus.io/scheme: http
+    prometheus.io/scrape: "true"
+  creationTimestamp: "2023-06-09T12:26:11Z"
+  generateName: nginxingress-sample-nginx-ingress-controller-788b95fb47-
+  labels:
+    app.kubernetes.io/instance: nginxingress-sample
+    app.kubernetes.io/name: nginx-ingress
+    app.kubernetes.io/version: 3.1.1
+    app.nginx.org/version: 1.23.4
+    pod-template-hash: 788b95fb47
+  name: nginxingress-sample-nginx-ingress-controller-788b95fb47-shznl
+  namespace: nginx-ingress-operator-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: nginxingress-sample-nginx-ingress-controller-788b95fb47
+    uid: c9c8fdfc-e048-4a65-a7f7-e23061be3037
+  resourceVersion: "18440512"
+  uid: 696db35c-bffb-451d-b243-4af07f002b7d
+spec:
+  automountServiceAccountToken: true
+  containers:
+  - args:
+    - -nginx-plus=false
+    - -nginx-reload-timeout=60000
+    - -enable-app-protect=false
+    - -enable-app-protect-dos=false
+    - -nginx-configmaps=$(POD_NAMESPACE)/nginxingress-sample-nginx-ingress
+    - -ingress-class=nginx
+    - -health-status=false
+    - -health-status-uri=/nginx-health
+    - -nginx-debug=false
+    - -v=1
+    - -nginx-status=true
+    - -nginx-status-port=8080
+    - -nginx-status-allow-cidrs=127.0.0.1
+    - -report-ingress-status
+    - -external-service=nginxingress-sample-nginx-ingress-controller
+    - -enable-leader-election=true
+    - -leader-election-lock-name=nginxingress-sample-nginx-ingress-leader-election
+    - -enable-prometheus-metrics=true
+    - -prometheus-metrics-listen-port=9113
+    - -prometheus-tls-secret=
+    - -enable-service-insight=false
+    - -service-insight-listen-port=9114
+    - -service-insight-tls-secret=
+    - -enable-custom-resources=true
+    - -enable-snippets=false
+    - -include-year=false
+    - -disable-ipv6=false
+    - -enable-tls-passthrough=false
+    - -enable-preview-policies=false
+    - -enable-cert-manager=false
+    - -enable-oidc=false
+    - -enable-external-dns=false
+    - -ready-status=true
+    - -ready-status-port=8081
+    - -enable-latency-metrics=false
+    env:
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    image: nginx/nginx-ingress:3.1.1-ubi
+    imagePullPolicy: IfNotPresent
+    name: nginx-ingress
+    ports:
+    - containerPort: 80
+      name: http
+      protocol: TCP
+    - containerPort: 443
+      name: https
+      protocol: TCP
+    - containerPort: 9113
+      name: prometheus
+      protocol: TCP
+    - containerPort: 8081
+      name: readiness-port
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /nginx-ready
+        port: readiness-port
+        scheme: HTTP
+      periodSeconds: 1
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        add:
+        - NET_BIND_SERVICE
+        drop:
+        - ALL
+      readOnlyRootFilesystem: false
+      runAsNonRoot: true
+      runAsUser: 101
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-2cdgs
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: msrv
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccount: nginx-ingress
+  serviceAccountName: nginx-ingress
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-2cdgs
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-06-09T12:26:10Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-06-09T12:26:29Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-06-09T12:26:29Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-06-09T12:26:11Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://72e500fa767c8ee2763c5c2ecfb75e31ee6e80bb982a564bdc25dd58f83b6994
+    image: docker.io/nginx/nginx-ingress:3.1.1-ubi
+    imageID: docker.io/nginx/nginx-ingress@sha256:956ac3ba734315f9bb5ae0534f6714f3c76c75c559f742fe462c85bccdb41b36
+    lastState: {}
+    name: nginx-ingress
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-06-09T12:26:27Z"
+  hostIP: 192.168.1.146
+  phase: Running
+  podIP: 172.16.13.177
+  podIPs:
+  - ip: 172.16.13.177
+  qosClass: Burstable
+  startTime: "2023-06-09T12:26:10Z"

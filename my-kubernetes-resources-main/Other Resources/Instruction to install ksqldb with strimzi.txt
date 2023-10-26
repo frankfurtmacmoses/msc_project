@@ -1,0 +1,12 @@
+git clone https://github.com/confluentinc/cp-helm-charts.git
+cd cp-helm-charts
+
+
+--Change to your bootstrap server
+
+
+helm install cp-ksql-server \
+    --set ksql.headless=false \
+    --set kafka.bootstrapServers=my-cluster-kafka-bootstrap:9092 \ 
+    --set imageTag=7.1.1 \
+  charts/cp-ksql-server -n kafka
